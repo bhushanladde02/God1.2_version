@@ -60,7 +60,7 @@ public class MainScreen extends Activity implements View.OnClickListener,
 	private WarpClient theClient;//bhushan
 	private ProgressDialog progressDialog;//bhushan
     private Handler handler = new Handler();//bhushan
-	
+	int flag=0;
 	TextView previousTab;
 	TextView firstTab;
 	
@@ -166,6 +166,79 @@ public class MainScreen extends Activity implements View.OnClickListener,
 
 	}
 
+	//Bhushan new Method - remove if dont want put for change tab
+	public void settingOriginalViewOnceAgain()
+	{
+		flag=0;	
+		System.out.println("object::::::::::::::::::"+this);
+		setContentView(R.layout.dailydetail);
+		
+		
+		
+		init();//bhushan
+
+		context = this;
+		this.firstTab = ((TextView) findViewById(R.id.firstTab));
+		this.previousTab = ((TextView) findViewById(R.id.previousTab));
+		this.lastTab=((TextView) findViewById(R.id.lastTab));//bhushan
+		
+		
+		
+		gaaliDAO = new GaaliDAO(this);
+		gaaliDAO.open();
+		
+		// context=this;
+
+		adView = (DfpAdView) this.findViewById(R.id.adView);
+		adView.loadAd(new AdRequest());
+
+		TextView text = (TextView) findViewById(R.id.text_header);
+		text.setText("Gaali Of The Day");
+		listView = (ListView) findViewById(R.id.god_list);
+		WebView webView = (WebView) findViewById(R.id.dailyDetailWebView);
+		// WebView preWebView = (WebView)
+		// findViewById(R.id.dailyPreDetailWebView);
+		// Disable Cache
+		webView.getSettings().setCacheMode(
+				android.webkit.WebSettings.LOAD_NO_CACHE);
+
+		vibe = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
+		webView.loadUrl("http://onine.in/god/god1.html");
+
+		adapter = new ArrayAdapter<String>(this,
+				 android.R.layout.simple_list_item_1, android.R.id.text1, values);
+				
+				
+
+		// Assign adapter to ListView
+		listView.setAdapter(adapter); 
+		
+		
+			
+		mShaker = new ShakeListener(this);
+		mShaker.setOnShakeListener(new ShakeListener.OnShakeListener() {
+			public void onShake() {				
+					new AsyncSender().execute();
+			}
+
+		});
+
+	
+
+
+		this.firstTab.setBackgroundResource(R.drawable.tab_active);
+		this.previousTab.setBackgroundResource(R.drawable.tab);
+		this.lastTab.setBackgroundResource(R.drawable.tab); //bhushan
+		this.firstTab.setOnClickListener(this);
+		this.previousTab.setOnClickListener(this);
+
+	
+		this.lastTab.setOnClickListener(this);
+	}
+	
+	
+	//bhushan end of new Method
+	
 	/*public void playAudio() {
 		try {
 			MediaPlayer mediaPlayer = new MediaPlayer();
@@ -257,21 +330,23 @@ public class MainScreen extends Activity implements View.OnClickListener,
 	public void onClick(View view) {
 		// TODO Auto-generated method stub
 		// TODO Auto-generated method stub
+		if(flag==1){settingOriginalViewOnceAgain();}//Bhushan new Method -- remove if dont want put for change tab
 		WebView webView = (WebView) findViewById(R.id.dailyDetailWebView);
-		
-		
-		
+		System.out.println("Webview..............................................................."+webView);
+		System.out.println("I am in this method..........................re");
 		
 //		WebView preWebView = (WebView) findViewById(R.id.dailyPreDetailWebView);
 		if (view == this.firstTab) {
+		   System.out.println("I am in first tab.................................................................................");
 			isFirstTab = true;
+			// if(flag==1){settingOriginalViewOnceAgain();}//Bhushan new Method -- remove if dont want put for change tab
 			webView.setVisibility(View.VISIBLE);
 			listView.setVisibility(View.GONE);
 			// this.firstTab=(TextView)findViewById(R.drawable.tab_active);
 			this.firstTab.setBackgroundResource(R.drawable.tab_active);
 			this.previousTab.setBackgroundResource(R.drawable.tab);
 			this.lastTab.setBackgroundResource(R.drawable.tab);
-
+			flag=0;
 			// this.previousTab=(TextView)findViewById(R.drawable.tab);
 //			System.out.println("First Tab");
 			webView.loadUrl("http://onine.in/god/god1.html");
@@ -280,19 +355,17 @@ public class MainScreen extends Activity implements View.OnClickListener,
 
 		} else if (view == this.previousTab) {
 			isFirstTab = false;
+			System.out.println("I am in previous tab................................................................................");
+			//if(flag==1){settingOriginalViewOnceAgain();}//Bhushan new Method --  remove if dont want put for change tab
 			// this.previousTab=(TextView)findViewById(R.drawable.tab_active);
 			// this.firstTab=(TextView)findViewById(R.drawable.tab);
 			this.previousTab.setBackgroundResource(R.drawable.tab_active);
 			this.firstTab.setBackgroundResource(R.drawable.tab);
 			this.lastTab.setBackgroundResource(R.drawable.tab);
-
-			
 			this.previousTab.setTextColor(R.color.black_overlay);
-
-			
-			adView.loadAd(new AdRequest());
+     		adView.loadAd(new AdRequest());
 			webView.setVisibility(View.GONE);
-			
+			flag=0;
 			listView.setVisibility(View.VISIBLE);
 			
 			
@@ -346,16 +419,34 @@ public class MainScreen extends Activity implements View.OnClickListener,
 			});
 		}else if (view == this.lastTab) {//bhushan
 		isFirstTab = false;
-	
+	    flag=1;		
 		this.lastTab.setBackgroundResource(R.drawable.tab_active);
 		this.firstTab.setBackgroundResource(R.drawable.tab);
 		this.previousTab.setBackgroundResource(R.drawable.tab);
 		this.lastTab.setTextColor(R.color.black_overlay);
 		
 		setContentView(R.layout.activity_main);//bhushan
+	
+		//webView.setVisibility(View.GONE);
+		//listView.setVisibility(View.GONE);
 		nameEditText = (EditText)findViewById(R.id.editTextName);//bhushan
 		//init();//bhushan
+		////////////////////////////////////////////////////////////////   BBHUSHAN CODE <This Code is for Android activity_main.xml to set there content..>
+		TextView text = (TextView) findViewById(R.id.text_header);
+		text.setText("Gaali Of The Day");
+		context = this;
+		this.firstTab = ((TextView) findViewById(R.id.firstTab));
+		this.previousTab = ((TextView) findViewById(R.id.previousTab));
+	    this.lastTab=((TextView) findViewById(R.id.lastTab));//bhushan
+		this.firstTab.setOnClickListener(this);
+		this.previousTab.setOnClickListener(this);
+		this.lastTab.setBackgroundResource(R.drawable.tab);
+		this.previousTab.setBackgroundResource(R.drawable.tab);
+		this.firstTab.setBackgroundResource(R.drawable.tab); //bhushan
+		this.lastTab.setOnClickListener(this);
 		
+		/////////////////////////////////////////////////////////////////   BBHUSHAN CODE
+			
 		
 		//setContentView(R.layout.activity_main);  //comment by me bhushan
 		//nameEditText = (EditText)findViewById(R.id.editTextName);//comment by me bhushan

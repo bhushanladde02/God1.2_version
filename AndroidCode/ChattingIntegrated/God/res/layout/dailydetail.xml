@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout android:orientation="vertical" android:background="#ffffffff" android:layout_width="fill_parent" android:layout_height="fill_parent" android:weightSum="1.0"
-  xmlns:android="http://schemas.android.com/apk/res/android">
+<LinearLayout android:orientation="vertical" 
+    android:background="#ffffffff" 
+    android:layout_width="fill_parent" 
+    android:layout_height="fill_parent" 
+    android:weightSum="1.0"
+    xmlns:android="http://schemas.android.com/apk/res/android">
     <LinearLayout android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_weight="1.0">
         <include layout="@layout/header" />
         
@@ -19,8 +23,8 @@
                 <WebView android:id="@+id/dailyDetailWebView" android:scrollbars="none" android:layout_width="fill_parent" android:layout_height="fill_parent" />
                 <WebView android:id="@+id/dailyPreDetailWebView" android:visibility="gone" android:scrollbars="none" android:layout_width="fill_parent" android:layout_height="fill_parent" />
                 <ListView android:id="@+id/god_list" android:visibility="gone" android:layout_width="fill_parent" android:layout_height="wrap_content" android:divider="@drawable/divider" />
-             
-            </LinearLayout>
+                      
+             </LinearLayout>
         </FrameLayout>
        
     </LinearLayout>

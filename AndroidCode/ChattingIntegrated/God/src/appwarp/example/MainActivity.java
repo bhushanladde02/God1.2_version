@@ -3,13 +3,18 @@ package appwarp.example;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
 import android.view.View;
+import android.webkit.WebView;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import com.onine.god.MainScreen;
 import com.onine.god.R;
 import com.shephertz.app42.gaming.multiplayer.client.WarpClient;
 import com.shephertz.app42.gaming.multiplayer.client.command.WarpResponseResultCode;
@@ -19,7 +24,7 @@ import com.shephertz.app42.gaming.multiplayer.client.events.RoomEvent;
 import com.shephertz.app42.gaming.multiplayer.client.listener.ConnectionRequestListener;
 import com.shephertz.app42.gaming.multiplayer.client.listener.RoomRequestListener;
 
-public class MainActivity extends Activity implements ConnectionRequestListener, RoomRequestListener{
+public class MainActivity extends Activity implements ConnectionRequestListener, RoomRequestListener, View.OnClickListener{
 
 	
 	private EditText nameEditText;
@@ -27,13 +32,32 @@ public class MainActivity extends Activity implements ConnectionRequestListener,
 	private ProgressDialog progressDialog;
     private Handler handler = new Handler();
     
-	
+    //bhushan
+    //TextView previousTab;
+	//TextView firstTab;
+	//Context context;
+    //bhushan end
+    
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 		nameEditText = (EditText)findViewById(R.id.editTextName);
 		init();
+		//bhushan change start
+		//context = this;
+		//this.firstTab = ((TextView) findViewById(R.id.firstTab));
+		//this.previousTab = ((TextView) findViewById(R.id.previousTab));
+		//this.firstTab.setOnClickListener(this);
+		//this.previousTab.setOnClickListener(this);
+		//bhushan change end
+		
+	}
+	@Override
+	public void onClick(View view) {
+		// TODO Auto-generated method stub
+		// TODO Auto-generated method stub
+		//setContentView(R.layout.dailydetail);
 	}
 	
 	@Override
@@ -147,8 +171,7 @@ public class MainActivity extends Activity implements ConnectionRequestListener,
 
 	@Override
 	public void onLeaveRoomDone(RoomEvent arg0) {
-		
-		
+
 	}
 
 	@Override
@@ -199,4 +222,13 @@ public class MainActivity extends Activity implements ConnectionRequestListener,
 			}
 		});
 	}
+	  /** Called just before the activity is destroyed. bhushan code inserted*/
+	  /* @Override
+	   public void onDestroy() {
+	      super.onDestroy();
+			Intent intent = new Intent(this, MainScreen.class); //new code added by bhushan
+			startActivity(intent);  //new code added by bhushan
+			
+	   }*/
+
 }

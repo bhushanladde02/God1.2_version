@@ -44,6 +44,10 @@ public class ChatActivity extends Activity implements RoomRequestListener, Notif
 	private Handler handler = new Handler();
 	private ArrayList<User> onlineUserList = new ArrayList<User>();
 	
+	//bhushan Code
+	
+	//Bhushan...
+	
 	public void onCreate(Bundle savedInstanceState){
 		super.onCreate(savedInstanceState);
 		userListAdapter = new UserListAdapter(this);
@@ -116,6 +120,7 @@ public class ChatActivity extends Activity implements RoomRequestListener, Notif
 	public void onSendClicked(View view){
 		outputScrollView.fullScroll(ScrollView.FOCUS_DOWN);
 		theClient.sendChat(inputEditText.getText().toString());
+		inputEditText.setText("");// code added by bhushan
 	}
 	
 	@Override
