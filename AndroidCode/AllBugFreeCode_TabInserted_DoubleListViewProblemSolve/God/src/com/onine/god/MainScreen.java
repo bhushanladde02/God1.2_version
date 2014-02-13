@@ -831,7 +831,7 @@ public class MainScreen extends Activity implements View.OnClickListener,
 		super.onDestroy();
 		//fillOnlyOnce=0;
 		fillOnlyOnce1=1;
-		gaaliDAO.deleteGaaliAll();
+	//	gaaliDAO.deleteGaaliAll();
 		gaaliDAO.close();
 	}
 
