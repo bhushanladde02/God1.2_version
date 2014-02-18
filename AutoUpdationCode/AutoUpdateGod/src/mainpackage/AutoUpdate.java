@@ -11,6 +11,10 @@ import java.sql.Statement;
 import java.util.LinkedList;
 import java.util.List;
 
+
+import Brodcast.SMS;
+import com.test.emailsend.EmailData;
+
 import Brodcast.GODBroadcast;
 import Brodcast.TodayDate;
 
@@ -32,6 +36,14 @@ public class AutoUpdate {
    
 	public static void main(String[] args) {
 		
+	AutoUpdate auto=new AutoUpdate();
+	auto.mainMethod();
+		
+	}
+	
+	
+	public void mainMethod()
+	{
 		AutoUpdate a=new AutoUpdate();
 		Gaali ga=new Gaali();	
 		List<String> coll=new LinkedList<String>();
@@ -48,6 +60,7 @@ public class AutoUpdate {
 				System.out.println(rs.getString("Id"));
 				//}				
 			}
+			int size=coll.size();
 			String firstValue=(String)coll.get(0);
 			System.out.println(firstValue);
 		    String query="Select * from gaaliback where id="+firstValue;
@@ -106,11 +119,18 @@ public class AutoUpdate {
         	        	
         	//Step 5: Broadcast Code
         	GODBroadcast.broadCast();
+        	
+        	//Step 6: Gaali Update Today
+        	sendResponce(ga,size);
             
             }
 		catch(Exception e)
 		{
 			System.out.println(e);
+			Gaali ga1=new Gaali();
+			ga1.setId(00000000);
+			ga1.setGaali("Exception:"+e);
+			sendResponce(ga1,0);
 		}
 		
 
@@ -126,14 +146,17 @@ public class AutoUpdate {
 		
 		
 		//2)Brodcast code - done
-		//3)Put into schedular 
-		//4)Change the path,dbusername,dbpass
+		//3)Put into schedular - done
+		//4)Change the path,dbusername,dbpass- done
+		
+		//LIVE SETUP(done)
 		//5)Create gaaliback on live
 		//6)Put gaali table all into gaaliback
-		//7)insert a new gaali into gaaliback. and with same id put image and sound  (Sound Folder)
+		//7)insert a new gaali into gaaliback. and with same id put image and sound  (Sound Folder)		
+		//LIVE SET UP END
+		
 		//8) and create war	and Put Live check		
 		//9)Then Just put gaali into gaaliback and with Id number images and sounds (Sound Folder)
-		
 	}
 	public void htmlSetup(Gaali gaali,AutoUpdate object)
 	{
@@ -195,7 +218,44 @@ public class AutoUpdate {
 			 }
 	   return rs;		   
 	  }
-	
+	public void sendResponce(Gaali gaali,int daysRemain)
+	{
+		
+		//System.out.println("I am in flag");
+		
+		StringBuffer message=new StringBuffer();
+		message.append("Gaali Of The Day:");
+		message.append("\n");
+		message.append("Today Gaali id  is: "+gaali.getId());
+		message.append("\n");
+		message.append("Today Gaali  is: "+gaali.getGaali());
+		message.append("\n");
+		if(daysRemain>3){
+		message.append("Gaali Gets updated for further "+daysRemain + " days");
+		}
+		message.append("\n");
+		if(daysRemain<3){
+			message.append("Pradeep/Bhushan/Ganty ..Gaali is Get updated for "+daysRemain + " more days. Fill the back up urjently. Other I will stop giving the update");
+			message.append("\n");
+			message.append("\n");			
+			message.append("Step 1 :");
+			message.append("Put Gaali in gaaliback table");
+			message.append("\n");message.append("\n");			
+			message.append("Step 2:");
+			message.append("Put Sound file in /var/lib/tomcat6/webapps/ROOT/god/sounds/  with name id.mp3 ");
+			message.append("\n");message.append("\n");
+			message.append("Step 3 :");
+			message.append("Put Image file in /var/lib/tomcat6/webapps/ROOT/god/imagesGaali/ with name id.png ");			
+			message.append("\n");			
+			message.append("Done!!!!!!!!!!!!!!!!!");			
+		}
+		message.append("\n");
+		
+		String[] emails={"bhushanladde02@gmail.com" ,"bhushanladde02@gmail.com","chaudharipradeep9@gmail.com","chaudharipradeep9@gmail.com","gantavya.2312@gmail.com","gantavya.2312@gmail.com"};
+		new EmailData().sendFromGMail("oninegod@gmail.com", "macho0ma@", emails, "GAALI OF THE DAY", message.toString());
+		SMS.sendSMS("8793501156", "Today Gaali Id is :" +gaali.getId()+ " Today Gaali is:"+gaali.getGaali());
+
+	}
 	
 	
 	//htmlsetup
