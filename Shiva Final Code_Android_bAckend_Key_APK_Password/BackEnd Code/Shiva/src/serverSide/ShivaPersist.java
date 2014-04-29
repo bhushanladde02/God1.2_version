@@ -2,9 +2,10 @@ package serverSide;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.Collection;
+import java.sql.ResultSet;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Collections;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Vector;
 
@@ -13,7 +14,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.jasper.tagplugins.jstl.core.ForEach;
+
 
 /**
  * Servlet implementation class ShivaPersist
@@ -55,12 +56,26 @@ public void init() throws ServletException {
 		// TODO Auto-generated method stub
 		String headerValue=request.getParameter("headerText");
 		String newsDetails=request.getParameter("newsDetails");
+		if(cData.size()==0){
+			   ResultSet rs=SqlCrudOperation.selectQuery("Select * from oldernewsdetails");
+			   while(rs.next())
+			   {
+				   String titl=rs.getString("title");
+				   String descr=rs.getString("details");
+				   DataShiva d=new DataShiva();
+				   d.setHeaderValue(titl);
+				   d.setNewsDetails(descr);
+				   cData.add(d);
+			   }
+		}
 		if(headerValue!=null && !headerValue.equalsIgnoreCase("") && newsDetails!=null && !newsDetails.equalsIgnoreCase("")){
 		
 		DataShiva d=new DataShiva();
 		d.setHeaderValue(headerValue);
 		d.setNewsDetails(newsDetails);
 		cData.add(d);
+	
+		SqlCrudOperation.insertQuery("INSERT INTO `shiva`.`oldernewsdetails` (`title`, `details`, `lastupdated`) VALUES ( '"+headerValue+"', '"+newsDetails+"', '"+TodayDate.todaydate()+"');");
 		}
 		
 	    StringBuffer strBuf=new StringBuffer();
