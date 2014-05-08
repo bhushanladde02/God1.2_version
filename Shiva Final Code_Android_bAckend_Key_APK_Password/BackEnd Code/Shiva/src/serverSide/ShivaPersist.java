@@ -57,6 +57,7 @@ public void init() throws ServletException {
 		String headerValue=request.getParameter("headerText");
 		String newsDetails=request.getParameter("newsDetails");
 		if(cData.size()==0){
+			cData.clear();
 			   ResultSet rs=SqlCrudOperation.selectQuery("Select * from oldernewsdetails");
 			   while(rs.next())
 			   {
