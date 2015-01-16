@@ -1,0 +1,1 @@
+It contains a different type of android code. It helps to people to generation dyanamic UI in android
