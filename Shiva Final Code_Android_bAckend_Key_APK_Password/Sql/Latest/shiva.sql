@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: May 03, 2015 at 07:37 PM
+-- Generation Time: May 05, 2015 at 07:18 PM
 -- Server version: 5.5.16
 -- PHP Version: 5.3.8
 
@@ -31,6 +31,7 @@ CREATE TABLE IF NOT EXISTS `oldernewsdetails` (
   `title` varchar(10000) CHARACTER SET utf8 NOT NULL,
   `details` varchar(10000) CHARACTER SET utf8 NOT NULL,
   `lastupdated` varchar(11) CHARACTER SET utf8 NOT NULL,
+  `authflag` varchar(2) COLLATE utf8_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=12 ;
 
@@ -38,9 +39,9 @@ CREATE TABLE IF NOT EXISTS `oldernewsdetails` (
 -- Dumping data for table `oldernewsdetails`
 --
 
-INSERT INTO `oldernewsdetails` (`id`, `title`, `details`, `lastupdated`) VALUES
-(10, 'जन्मदिन काय सांगतो', 'जन्मदिन काय सांगतो', '2015/05/03'),
-(11, 'जन्मदिन काय सांगतो', 'जन्मदिन काय सांगतो', '2015/05/03');
+INSERT INTO `oldernewsdetails` (`id`, `title`, `details`, `lastupdated`, `authflag`) VALUES
+(10, 'जन्मदिन काय सांगतो', 'जन्मदिन काय सांगतो', '2015/05/03', 'n'),
+(11, 'जन्मदिन काय सांगतो', 'जन्मदिन काय सांगतो', '2015/05/03', 'n');
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
