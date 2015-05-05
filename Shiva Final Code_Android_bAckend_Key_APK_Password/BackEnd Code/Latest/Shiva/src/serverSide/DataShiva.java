@@ -3,6 +3,20 @@ package serverSide;
 public class DataShiva {
   public String headerValue;
   public String newsDetails;
+  public String id;
+  public String authValue;
+public String getId() {
+	return id;
+}
+public void setId(String id) {
+	this.id = id;
+}
+public String getAuthValue() {
+	return authValue;
+}
+public void setAuthValue(String authValue) {
+	this.authValue = authValue;
+}
 public String getHeaderValue() {
 	return headerValue;
 }
