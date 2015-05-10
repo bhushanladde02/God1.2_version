@@ -52,31 +52,56 @@ public void init() throws ServletException {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		System.out.println("In Post");
+		/*String bhus="जन्मदिन काय सांगतो";
+		System.out.println("bhusha:::::"+bhus);*/
+		/*TestMarathi test=new TestMarathi();
+		String bhus=test.TestMar();
+		System.out.println("Bhushan :::::::::"+bhus);
+		final String param = new String(bhus.getBytes(
+                "iso-8859-1"), "UTF-8");
+		System.out.println(param);*/
 		try{
 		// TODO Auto-generated method stub
 		String headerValue=request.getParameter("headerText");
+		
+		//final String param = new String(request.getParameter("headerText").getBytes("iso-8859-1"), "UTF-8");
+		//System.out.println("Param ::::::::::::::::::::"+param);
+		
 		String newsDetails=request.getParameter("newsDetails");
 		if(cData.size()==0){
+			System.out.println("cData.size()::"+cData.size());
+			
 			cData.clear();
 			   ResultSet rs=SqlCrudOperation.selectQuery("Select * from oldernewsdetails");
 			   while(rs.next())
 			   {
 				   String titl=rs.getString("title");
 				   String descr=rs.getString("details");
+				   String date=rs.getString("lastupdated");
+				   //System.out.println("titl::"+titl);
 				   DataShiva d=new DataShiva();
 				   d.setHeaderValue(titl);
 				   d.setNewsDetails(descr);
+				   d.setLastUpdatedDt(date);
 				   cData.add(d);
 			   }
 		}
 		if(headerValue!=null && !headerValue.equalsIgnoreCase("") && newsDetails!=null && !newsDetails.equalsIgnoreCase("")){
 		
 		DataShiva d=new DataShiva();
+		//System.out.println("headerValueheaderValueheaderValueheaderValue:"+headerValue);
+		String headerValueCon = new String(headerValue.getBytes("UTF-8"), "UTF-8");
+		String newsDetailsCon = new String(newsDetails.getBytes("UTF-8"), "UTF-8");
+		
+		//System.out.println("newStringnewStringnewStringnewString:::"+newString);
+		
 		d.setHeaderValue(headerValue);
 		d.setNewsDetails(newsDetails);
 		cData.add(d);
-	
-		SqlCrudOperation.insertQuery("INSERT INTO `shiva`.`oldernewsdetails` (`title`, `details`, `lastupdated`) VALUES ( '"+headerValue+"', '"+newsDetails+"', '"+TodayDate.todaydate()+"');");
+	    String query="INSERT INTO `shiva`.`oldernewsdetails` (`title`, `details`, `lastupdated`,`authflag`) VALUES ( '"+headerValueCon+"', '"+newsDetailsCon+"', '"+TodayDate.todaydate()+"','n');";
+	    System.out.println("Query ::"+query);
+	    String query1 = new String(query.getBytes("UTF-8"), "UTF-8");
+		SqlCrudOperation.insertQuery(query1);
 		}
 		
 	    StringBuffer strBuf=new StringBuffer();
@@ -87,11 +112,17 @@ public void init() throws ServletException {
 		//if(strBuf.indexOf("</table>"))
 		
 		for(DataShiva da:cData){
-			System.out.println(strBuf.toString());
+			//System.out.println("I am here");
+			//System.out.println(strBuf.toString());
 			strBuf.append(da);
 		}
+		
+		System.out.println(strBuf.toString());
 		Collections.reverse(cData);
 		//strBuf.append("</table>");
+		//response.setCharacterEncoding("UTF-8");
+		//response.setContentType("text/html; charset=UTF-8");
+		response.setCharacterEncoding("UTF-8");
 		
 		PrintWriter pw=response.getWriter();
 		
@@ -100,10 +131,7 @@ public void init() throws ServletException {
 		}catch (Exception e) {
 			System.out.println(e);
 			// TODO: handle exception
-		}{
-			
 		}
-		
 		
 		
 	}

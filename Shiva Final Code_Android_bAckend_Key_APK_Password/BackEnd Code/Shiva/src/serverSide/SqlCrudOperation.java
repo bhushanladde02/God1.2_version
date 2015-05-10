@@ -17,10 +17,11 @@ public class SqlCrudOperation {
 	   protected static final String dbName="shiva";
 	   //Local
 	   static final String JDBC_DRIVER = "com.mysql.jdbc.Driver";  
-	   static final String DB_URL = "jdbc:mysql://localhost/"+dbName;//savepasswords.com";
+	   //static final String DB_URL = "jdbc:mysql://localhost/"+dbName;//savepasswords.com";
+	   static final String DB_URL = "jdbc:mysql://localhost/"+dbName+"?useUnicode=true&characterEncoding=utf-8";//savepasswords.com";
 	   static final String USER = "root";
-	   //static final String PASS = "macho0ma!";//live
-	   static final String PASS = "";//local
+	   static final String PASS = "macho0ma!";//live
+	   //static final String PASS = "";//local
 	   //End Local
 	  
 	

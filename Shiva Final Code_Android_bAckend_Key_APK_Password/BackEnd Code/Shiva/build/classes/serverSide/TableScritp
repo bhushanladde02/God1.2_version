@@ -1,0 +1,28 @@
+CREATE TABLE IF NOT EXISTS `oldernewsdetails` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `title` nvarchar(10000) NOT NULL,
+  `details` nvarchar(10000) NOT NULL,
+  `lastupdated` nvarchar(11) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
+
+
+http://www.javaprogrammingforums.com/javaserver-pages-jsp-jstl/160-adding-marathi-words-mysql-table.html
+
+http://stackoverflow.com/questions/138948/how-to-get-utf-8-working-in-java-webapps  (Solution Work-Tomcat Setting)
+
+http://stackoverflow.com/questions/11292898/how-to-insert-hindi-language-in-mysql
+
+http://www.whirlycott.com/phil/2005/05/11/building-j2ee-web-applications-with-utf-8-support/
+
+http://stackoverflow.com/questions/3029401/java-servlet-and-utf-8-problem
+
+http://stackoverflow.com/questions/3598117/unable-to-create-a-file-with-foreign-language-characters --> problem solve (Solution Work-print in eclipse)
+
+http://stackoverflow.com/questions/6115612/how-to-convert-an-entire-mysql-database-characterset-and-collation-to-utf-8  --> DB end Changes
+
+http://stackoverflow.com/questions/4864899/encoding-and-servlet-api-setcontenttype-or-setcharacterencoding--Response text format (Solution Work)
+
+http://stackoverflow.com/questions/8854106/java-string-encoding-utf-8-- convert string into utf8
+
+http://stackoverflow.com/questions/3275524/java-mysql-utf8-problem-- One more solution for db problem   (Solution Work)
