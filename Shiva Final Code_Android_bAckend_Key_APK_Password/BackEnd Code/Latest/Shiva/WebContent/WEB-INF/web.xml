@@ -69,4 +69,14 @@
     <servlet-name>AuthServlet</servlet-name>
     <url-pattern>/AuthServlet</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>Registeruser</display-name>
+    <servlet-name>Registeruser</servlet-name>
+    <servlet-class>serverSide.Registeruser</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Registeruser</servlet-name>
+    <url-pattern>/Registeruser</url-pattern>
+  </servlet-mapping>
 </web-app>

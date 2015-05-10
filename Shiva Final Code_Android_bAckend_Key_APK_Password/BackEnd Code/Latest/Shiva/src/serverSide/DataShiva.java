@@ -5,6 +5,13 @@ public class DataShiva {
   public String newsDetails;
   public String id;
   public String authValue;
+  public String lastUpdatedDt;
+public String getLastUpdatedDt() {
+	return lastUpdatedDt;
+}
+public void setLastUpdatedDt(String lastUpdatedDt) {
+	this.lastUpdatedDt = lastUpdatedDt;
+}
 public String getId() {
 	return id;
 }
@@ -32,7 +39,7 @@ public void setNewsDetails(String newsDetails) {
 @Override
 	public String toString() {
 		
-		return "<tr><td><b>"+headerValue+":</b><br/>"+newsDetails+"</td></tr>";
+		return "<tr><td><b>"+headerValue+":</b><br/>"+newsDetails+"<br/><b> तारीख:</b>"+lastUpdatedDt.split("/")[2]+"/"+lastUpdatedDt.split("/")[1]+"/"+lastUpdatedDt.split("/")[0]+"</td></tr>";
 	}
   
 }

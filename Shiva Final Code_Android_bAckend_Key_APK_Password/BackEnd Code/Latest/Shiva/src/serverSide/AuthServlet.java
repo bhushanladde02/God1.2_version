@@ -24,7 +24,7 @@ import com.google.gson.Gson;
  */
 public class AuthServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	List<DataShiva> cData=null;   
+
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
@@ -38,7 +38,7 @@ public class AuthServlet extends HttpServlet {
 	 */
 	public void init(ServletConfig config) throws ServletException {
 		// TODO Auto-generated method stub
-		cData=new Vector<DataShiva>();
+		//cData=new Vector<DataShiva>();
 	}
 
 	/**
@@ -58,48 +58,53 @@ public class AuthServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		/*System.out.println("In get");
+	/*	System.out.println("In get");
+		List<DataShiva> cData=new Vector<DataShiva>();;   
 
 		try{
 
-		if(cData.size()==0){
-			System.out.println("cData.size()::"+cData.size());
-			cData.clear();
-			   ResultSet rs=SqlCrudOperation.selectQuery("Select * from oldernewsdetails where authflag='n'");
-			   while(rs.next())
-			   {
-				   String titl=rs.getString("title");
-				   String descr=rs.getString("details");
-				   String id=rs.getString("id");
-				   String authflag=rs.getString("authflag");
-				   //System.out.println("titl::"+titl);
-				   DataShiva d=new DataShiva();
-				   d.setHeaderValue(titl);
-				   d.setNewsDetails(descr);
-				   d.setId(id);
-				   d.setAuthValue(authflag);
-				   cData.add(d);
-			   }
-		}
+			if(cData.size()==0){
+				System.out.println("cData.size()::"+cData.size());
+				cData.clear();
+				System.out.println("I am in post to authorize");
+				//ResultSet rs=SqlCrudOperation.selectQuery("Select * from oldernewsdetails where authflag='n'");
+				ResultSet rs=SqlCrudOperation.selectQuery("Select * from oldernewsdetails");
+				while(rs.next())
+				{
+					String titl=rs.getString("title");
+					String descr=rs.getString("details");
+					String id=rs.getString("id");
+					String authflag=rs.getString("authflag");
+					String date=rs.getString("lastupdated");
+					//System.out.println("titl::"+titl);
+					DataShiva d=new DataShiva();
+					d.setHeaderValue(titl);
+					d.setNewsDetails(descr);
+					d.setId(id);
+					d.setAuthValue(authflag);
+					d.setLastUpdatedDt(date);
+					cData.add(d);
+				}
+			}
 
-	    StringBuffer strBuf=new StringBuffer();
-		Collections.reverse(cData);
+			StringBuffer strBuf=new StringBuffer();
+			Collections.reverse(cData);
 
 
-		for(DataShiva da:cData){
-			strBuf.append(da);
-		}
+			for(DataShiva da:cData){
+				strBuf.append(da);
+			}
 
-		System.out.println(strBuf.toString());
-		Collections.reverse(cData);
+			System.out.println(strBuf.toString());
+			Collections.reverse(cData);
 
-		Gson g=new Gson();
-		String json =g.toJson(cData);
-		response.setCharacterEncoding("UTF-8");
-		response.setContentType("application/json; charset=UTF-8");
-		PrintWriter pw=response.getWriter();
+			Gson g=new Gson();
+			String json =g.toJson(cData);
+			response.setCharacterEncoding("UTF-8");
+			response.setContentType("application/json; charset=UTF-8");
+			PrintWriter pw=response.getWriter();
 
-		pw.write(json);
+			pw.write(json);
 
 		}catch (Exception e) {
 			System.out.println(e);
@@ -112,7 +117,7 @@ public class AuthServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-
+		List<DataShiva> cData=new Vector<DataShiva>();;   
 		System.out.println("In Post");
 
 		try{
@@ -121,19 +126,22 @@ public class AuthServlet extends HttpServlet {
 				System.out.println("cData.size()::"+cData.size());
 				cData.clear();
 				System.out.println("I am in post to authorize");
-				ResultSet rs=SqlCrudOperation.selectQuery("Select * from oldernewsdetails where authflag='n'");
+				//ResultSet rs=SqlCrudOperation.selectQuery("Select * from oldernewsdetails where authflag='n'");
+				ResultSet rs=SqlCrudOperation.selectQuery("Select * from oldernewsdetails");
 				while(rs.next())
 				{
 					String titl=rs.getString("title");
 					String descr=rs.getString("details");
 					String id=rs.getString("id");
 					String authflag=rs.getString("authflag");
+					String date=rs.getString("lastupdated");
 					//System.out.println("titl::"+titl);
 					DataShiva d=new DataShiva();
 					d.setHeaderValue(titl);
 					d.setNewsDetails(descr);
 					d.setId(id);
 					d.setAuthValue(authflag);
+					d.setLastUpdatedDt(date);
 					cData.add(d);
 				}
 			}

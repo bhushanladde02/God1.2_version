@@ -77,10 +77,12 @@ public void init() throws ServletException {
 			   {
 				   String titl=rs.getString("title");
 				   String descr=rs.getString("details");
+				   String date=rs.getString("lastupdated");
 				   //System.out.println("titl::"+titl);
 				   DataShiva d=new DataShiva();
 				   d.setHeaderValue(titl);
 				   d.setNewsDetails(descr);
+				   d.setLastUpdatedDt(date);
 				   cData.add(d);
 			   }
 		}
@@ -96,7 +98,7 @@ public void init() throws ServletException {
 		d.setHeaderValue(headerValue);
 		d.setNewsDetails(newsDetails);
 		cData.add(d);
-	    String query="INSERT INTO `shiva`.`oldernewsdetails` (`title`, `details`, `lastupdated`) VALUES ( '"+headerValueCon+"', '"+newsDetailsCon+"', '"+TodayDate.todaydate()+"');";
+	    String query="INSERT INTO `shiva`.`oldernewsdetails` (`title`, `details`, `lastupdated`,`authflag`) VALUES ( '"+headerValueCon+"', '"+newsDetailsCon+"', '"+TodayDate.todaydate()+"','n');";
 	    System.out.println("Query ::"+query);
 	    String query1 = new String(query.getBytes("UTF-8"), "UTF-8");
 		SqlCrudOperation.insertQuery(query1);
