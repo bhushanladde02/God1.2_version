@@ -12,6 +12,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import otherClass.GenerateRandomId;
+
+
 /**
  * Servlet implementation class Registeruser
  */
@@ -71,6 +74,11 @@ public class Registeruser extends HttpServlet {
 		//String headerValue=request.getParameter("headerText");
 		//String newsDetails=request.getParameter("newsDetails");
 		
+		int randomV=GenerateRandomId.randInt(1000,100000);
+		
+		Integer random=new Integer(randomV);
+		//need to send this value through SMS
+		
 		System.out.println("name:"+name);
 		System.out.println("phonenumber:"+phonenumber);
 		System.out.println("city:"+city);
@@ -103,7 +111,7 @@ public class Registeruser extends HttpServlet {
 		//d.setNewsDetails(newsDetails);
 	
 	   // String query="INSERT INTO `shiva`.`oldernewsdetails` (`title`, `details`, `lastupdated`,`authflag`) VALUES ( '"+headerValueCon+"', '"+newsDetailsCon+"', '"+TodayDate.todaydate()+"','n');";
-		String query="INSERT INTO `shiva`.`registeruser` (`id`, `name`, `address`, `email`, `phone`, `position`, `city`, `pannumber`, `gender`, `matrialstatus`, `age`, `country`, `Department`, `deviceid`, `lastupdatedate`, `password`) VALUES (NULL, '"+nameCon+"', '', '', '"+phonenumberCon+"', '', '"+cityCon+"', '', '"+genderCon+"', '', '', '"+countryCon+"', '', '"+deviceidCon+"', '"+TodayDate.todaydate()+"', '"+passwordCon+"');";
+		String query="INSERT INTO `shiva`.`registeruser` (`id`, `name`, `address`, `email`, `phone`, `position`, `city`, `pannumber`, `gender`, `matrialstatus`, `age`, `country`, `Department`, `deviceid`, `lastupdatedate`, `password`, `verify` , `status`   ) VALUES (NULL, '"+nameCon+"', '', '', '"+phonenumberCon+"', '', '"+cityCon+"', '', '"+genderCon+"', '', '', '"+countryCon+"', '', '"+deviceidCon+"', '"+TodayDate.todaydate()+"', '"+passwordCon+"', '"+random.toString()+"', 'N');";
 	    System.out.println("Query ::"+query);
 	    String query1 = new String(query.getBytes("UTF-8"), "UTF-8");
 	    resultinsert=SqlCrudOperation.insertQuery(query1);
