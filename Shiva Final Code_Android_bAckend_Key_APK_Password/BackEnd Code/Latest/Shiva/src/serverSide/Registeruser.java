@@ -45,8 +45,9 @@ public class Registeruser extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		//doPost(request,response);
-		//http://localhost:8080/Shiva/Registeruser?name=bhushan&phonenumber=8055925868&city=nasik&country=india&deviceid=22&gender=m
+		doPost(request,response);
+		//http://onine.in/Shiva/Registeruser?name=bhushan&phonenumber=8055925868&city=nasik&country=india&deviceid=22&gender=m&password=test
+		//http://localhost:8080/Shiva/Registeruser?name=bhushan&phonenumber=8055925868&city=nasik&country=india&deviceid=22&gender=m&password=test
 	}
 
 	/**
@@ -65,6 +66,8 @@ public class Registeruser extends HttpServlet {
 		String gender=request.getParameter("gender");
 		String country=request.getParameter("country");
 		String deviceid=request.getParameter("deviceid");
+		String password=request.getParameter("password");
+		
 		//String headerValue=request.getParameter("headerText");
 		//String newsDetails=request.getParameter("newsDetails");
 		
@@ -74,10 +77,13 @@ public class Registeruser extends HttpServlet {
 		System.out.println("country:"+country);
 		System.out.println("deviceid:"+deviceid);
 		System.out.println("gender:"+gender);
+		System.out.println("password:"+password);
 		
 		if(name!=null && !name.equalsIgnoreCase("") && phonenumber!=null && !phonenumber.equalsIgnoreCase("")  &&
 				city!=null && !city.equalsIgnoreCase("") && gender!=null && !gender.equalsIgnoreCase("")  &&
-						country!=null && !country.equalsIgnoreCase("") && deviceid!=null && !deviceid.equalsIgnoreCase("")){
+						country!=null && !country.equalsIgnoreCase("") && deviceid!=null && !deviceid.equalsIgnoreCase("")
+								&& password!=null && !password.equalsIgnoreCase("")		
+				){
 		
 		//DataShiva d=new DataShiva();
 		//System.out.println("headerValueheaderValueheaderValueheaderValue:"+headerValue);
@@ -87,6 +93,7 @@ public class Registeruser extends HttpServlet {
 		String genderCon = new String(gender.getBytes("UTF-8"), "UTF-8");
 		String countryCon = new String(country.getBytes("UTF-8"), "UTF-8");
 		String deviceidCon = new String(deviceid.getBytes("UTF-8"), "UTF-8");
+		String passwordCon = new String(password.getBytes("UTF-8"), "UTF-8");
 		//String newsDetailsCon = new String(newsDetails.getBytes("UTF-8"), "UTF-8");
 		
 		
@@ -96,7 +103,7 @@ public class Registeruser extends HttpServlet {
 		//d.setNewsDetails(newsDetails);
 	
 	   // String query="INSERT INTO `shiva`.`oldernewsdetails` (`title`, `details`, `lastupdated`,`authflag`) VALUES ( '"+headerValueCon+"', '"+newsDetailsCon+"', '"+TodayDate.todaydate()+"','n');";
-		String query="INSERT INTO `shiva`.`registeruser` (`id`, `name`, `address`, `email`, `phone`, `position`, `city`, `pannumber`, `gender`, `matrialstatus`, `age`, `country`, `Department`, `deviceid`, `lastupdatedate`) VALUES (NULL, '"+nameCon+"', '', '', '"+phonenumberCon+"', '', '"+cityCon+"', '', '"+genderCon+"', '', '', '"+countryCon+"', '', '"+deviceidCon+"', '"+TodayDate.todaydate()+"');";
+		String query="INSERT INTO `shiva`.`registeruser` (`id`, `name`, `address`, `email`, `phone`, `position`, `city`, `pannumber`, `gender`, `matrialstatus`, `age`, `country`, `Department`, `deviceid`, `lastupdatedate`, `password`) VALUES (NULL, '"+nameCon+"', '', '', '"+phonenumberCon+"', '', '"+cityCon+"', '', '"+genderCon+"', '', '', '"+countryCon+"', '', '"+deviceidCon+"', '"+TodayDate.todaydate()+"', '"+passwordCon+"');";
 	    System.out.println("Query ::"+query);
 	    String query1 = new String(query.getBytes("UTF-8"), "UTF-8");
 	    resultinsert=SqlCrudOperation.insertQuery(query1);
