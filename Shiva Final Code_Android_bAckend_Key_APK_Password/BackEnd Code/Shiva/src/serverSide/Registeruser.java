@@ -80,7 +80,7 @@ public class Registeruser extends HttpServlet {
 		
 		Integer random=new Integer(randomV);
 		
-		SMS.sendSMS(phonenumber, "शिव संघटनेचे अनुप्रयोग पडताळणी क्रमांक( Shiva Sanghatana App Verification Number) : random");
+		SMS.sendSMS(phonenumber, "शिव संघटनेचे अनुप्रयोग पडताळणी क्रमांक( Shiva Sanghatana App Verification Number) : "+random);
 		//need to send this value through SMS
 		
 		System.out.println("name:"+name);

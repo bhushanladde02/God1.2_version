@@ -10,7 +10,7 @@ import java.net.URLEncoder;
 public class SMS {
  
 	public static void main(String[] args) {
-		sendSMS("8793501156","Hi");
+		sendSMS("8793501156","शिव संघटनेचे अनुप्रयोग पडताळणी क्रमांक( Shiva Sanghatana App Verification Number) :");
 	}
  public static void sendSMS(String mobileNumber,String Message)
  {
