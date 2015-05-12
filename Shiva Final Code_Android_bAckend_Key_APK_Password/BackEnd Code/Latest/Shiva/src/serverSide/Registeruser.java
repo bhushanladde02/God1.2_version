@@ -12,6 +12,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import SMS.SMS;
+
 import otherClass.GenerateRandomId;
 
 
@@ -77,6 +79,8 @@ public class Registeruser extends HttpServlet {
 		int randomV=GenerateRandomId.randInt(1000,100000);
 		
 		Integer random=new Integer(randomV);
+		
+		SMS.sendSMS(phonenumber, "शिव संघटनेचे अनुप्रयोग पडताळणी क्रमांक( Shiva Sanghatana App Verification Number) : random");
 		//need to send this value through SMS
 		
 		System.out.println("name:"+name);
