@@ -69,6 +69,21 @@ public class SqlCrudOperation {
 	   return rs;		   
 	   }
 	   
+	   public static ResultSet selectQueryLogin(String sqlData,String username,String password){
+		   ResultSet rs=null; 
+		   try{
+			   PreparedStatement preparedStatement = getConnection().prepareStatement(sqlData);
+			   preparedStatement.setString(1, username);
+			   preparedStatement.setString(2, password);
+			   rs = preparedStatement.executeQuery();
+			  }catch(SQLException sqle){
+				  sqle.printStackTrace();
+			  }catch(Exception exe){
+			   exe.printStackTrace();
+			 }
+	   return rs;		   
+	   }
+	   
 	
 	   
 	   public static int updateQuery(String updateQuery)
