@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">shiva Sanghatana</string> 
+    <string name="hello_world">Hello world!</string>
+    <string name="menu_settings">Settings</string>
+    <string name="Description">
+        If you have dare in your ass then connect the gaali room 
+    </string>
+	<string name="connectToGod">Connect To Gaali Room</string>
+	<string name="start">Start</string>
+	<string name="get_all">Get All Rooms</string>
+	<string name="get_live_room_info">Get Live Room Info</string>
+	<string name="joinRoom">Join Room</string>
+	<string name="userName">Enter Your Name Asshole</string>
+	<string name="chat">Chat</string>
+	<string name="say">Say</string>
+	<string name="send">Send</string>
+	<string-array name="topic_arrays">
+        <item>sports</item>
+        <item>entertainment</item>
+        <item>education</item>
+        <item>books</item>
+        <item>science</item>
+    </string-array>
+    
+</resources>

@@ -6,6 +6,13 @@ public class DataShiva {
   public String id;
   public String authValue;
   public String lastUpdatedDt;
+  public String person;
+public String getPerson() {
+	return person;
+}
+public void setPerson(String person) {
+	this.person = person;
+}
 public String getLastUpdatedDt() {
 	return lastUpdatedDt;
 }

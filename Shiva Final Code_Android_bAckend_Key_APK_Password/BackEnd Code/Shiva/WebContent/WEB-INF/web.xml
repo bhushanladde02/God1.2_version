@@ -89,4 +89,14 @@
     <servlet-name>LoginServlet</servlet-name>
     <url-pattern>/LoginServlet</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>AddNews</display-name>
+    <servlet-name>AddNews</servlet-name>
+    <servlet-class>serverSide.AddNews</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>AddNews</servlet-name>
+    <url-pattern>/AddNews</url-pattern>
+  </servlet-mapping>
 </web-app>

@@ -58,6 +58,8 @@ public class AuthServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		
+		//doPost(request,response);
 	/*	System.out.println("In get");
 		List<DataShiva> cData=new Vector<DataShiva>();;   
 
@@ -127,7 +129,7 @@ public class AuthServlet extends HttpServlet {
 				cData.clear();
 				System.out.println("I am in post to authorize");
 				//ResultSet rs=SqlCrudOperation.selectQuery("Select * from oldernewsdetails where authflag='n'");
-				ResultSet rs=SqlCrudOperation.selectQuery("Select * from oldernewsdetails");
+				ResultSet rs=SqlCrudOperation.selectQuery("Select oldernewsdetails.id as id,oldernewsdetails.title,oldernewsdetails.details,oldernewsdetails.authflag,oldernewsdetails.lastupdated,registeruser.name from oldernewsdetails left outer join registeruser on oldernewsdetails.personid=registeruser.id");
 				while(rs.next())
 				{
 					String titl=rs.getString("title");
@@ -135,6 +137,7 @@ public class AuthServlet extends HttpServlet {
 					String id=rs.getString("id");
 					String authflag=rs.getString("authflag");
 					String date=rs.getString("lastupdated");
+					String name=rs.getString("name");
 					//System.out.println("titl::"+titl);
 					DataShiva d=new DataShiva();
 					d.setHeaderValue(titl);
@@ -142,6 +145,7 @@ public class AuthServlet extends HttpServlet {
 					d.setId(id);
 					d.setAuthValue(authflag);
 					d.setLastUpdatedDt(date);
+					d.setPerson(name);
 					cData.add(d);
 				}
 			}
