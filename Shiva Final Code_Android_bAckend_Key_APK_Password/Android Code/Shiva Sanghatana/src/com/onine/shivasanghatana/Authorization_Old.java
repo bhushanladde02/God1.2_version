@@ -7,19 +7,14 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
-import java.util.List;
 
 import org.apache.http.HttpResponse;
-import org.apache.http.NameValuePair;
 import org.apache.http.client.HttpClient;
-import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.mime.HttpMultipartMode;
 import org.apache.http.entity.mime.MultipartEntity;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicHeader;
-import org.apache.http.message.BasicNameValuePair;
-import org.apache.http.protocol.HTTP;
 
 import android.app.ListActivity;
 import android.app.ProgressDialog;
@@ -57,12 +52,11 @@ import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
-import com.onine.database.DatabaseHandler;
 import com.onine.pojo.DataShiva;
 
 
 
-public class Authorization extends  ListActivity implements View.OnClickListener,
+public class Authorization_Old extends  ListActivity implements View.OnClickListener,
 AdListener, AppEventListener{
 	Context context;
 	int flag=0;
@@ -101,9 +95,7 @@ AdListener, AppEventListener{
 	private static final String IDVALUE = "mobile";
 	private static final String PERSONNAME = "personname";
 	private static final String DATEVALUE = "datevalue";
-	DatabaseHandler databaseHandler=null;
-	static StringBuffer  strbuff=null;
-	
+
 	
     String sessionId=null;
 
@@ -115,32 +107,13 @@ AdListener, AppEventListener{
 		super.onCreate(savedInstanceState);
 		//this.requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.authorizationpage);
-		strbuff=new StringBuffer();
+		
 
 		adView = (DfpAdView) this.findViewById(R.id.adView);
 		adView.loadAd(new AdRequest());
 		TextView text = (TextView) findViewById(R.id.text_header);
 
 		text.setText("शिवा संघटना");
-		
-		databaseHandler=new DatabaseHandler(this);
-		//databaseHandler.truncatTable();//trancating once
-		int count=databaseHandler.getCount();
-		int recordCo=0;		
-		for(DataShiva cse:databaseHandler.getAll()){
-			recordCo++;
-			if(count==recordCo){
-				strbuff.append("'"+cse.getId()+"'");
-			}
-			else{
-				strbuff.append("'"+cse.getId()+"',");
-			}
-
-		}
-
-		System.out.println(strbuff.toString());
-
-		
 		Bundle extras = getIntent().getExtras();
 		if (extras == null) {
 		  return;
@@ -296,8 +269,8 @@ AdListener, AppEventListener{
 
 		}
 		else{*/
-			Authorization.this.finish();
-			Intent  intent = new Intent().setClass(this, Authorization.class);
+			Authorization_Old.this.finish();
+			Intent  intent = new Intent().setClass(this, Authorization_Old.class);
 			startActivity(intent);
 		//}
 	}
@@ -329,7 +302,7 @@ AdListener, AppEventListener{
 			return POST(urls[0],"auth");
 		}
 		// onPostExecute displays the results of the AsyncTask.
-		/*@Override
+		@Override
 		protected void onPostExecute(String result) {
 			System.out.println("#####################################result#########################################"+result);
 			Gson gson = new Gson();
@@ -356,113 +329,14 @@ AdListener, AppEventListener{
 			
 			Collections.reverse(lcs);
 		ListAdapter adapter = new SimpleAdapter(
-					Authorization.this, lcs,
+					Authorization_Old.this, lcs,
 					R.layout.list_item, new String[] { HEADER_VALUE, NEWS_DETAILS,
 							IDVALUE,PERSONNAME,DATEVALUE }, new int[] { R.id.name,
 							R.id.email, R.id.mobile, R.id.personname , R.id.datevalue});
 
 			setListAdapter(adapter);
 
-		}*/
-		
-		protected void onPostExecute(String result) {
-			if(result!=null && !result.toString().equalsIgnoreCase("")){
-				System.out.println("#####################################result#########################################"+result);
-				Gson gson = new Gson();
-				JsonParser parser = new JsonParser();
-				JsonArray jArray = parser.parse(result).getAsJsonArray();
-
-
-				for(JsonElement obj : jArray )
-				{
-
-					DataShiva cse = gson.fromJson( obj , DataShiva.class);
-					if(cse.headerValue!=null && !cse.headerValue.toString().equalsIgnoreCase("") &&
-							cse.newsDetails!=null && !cse.newsDetails.toString().equalsIgnoreCase("") &&
-							cse.id!=null && !cse.id.toString().equalsIgnoreCase("") &&
-							cse.person!=null && !cse.person.toString().equalsIgnoreCase("") &&
-							cse.lastUpdatedDt!=null && !cse.lastUpdatedDt.toString().equalsIgnoreCase("")){
-						DataShiva d=new DataShiva(cse.getHeaderValue().trim(),
-								cse.getNewsDetails().trim(),cse.getId().trim(),
-								cse.getAuthValue().trim(),
-								cse.getLastUpdatedDt().trim(),
-								cse.getPerson().trim());
-						databaseHandler.add(cse);
-						//hashing.put(, );
-						//lcs.add();
-					}
-				}
-				
-				List<DataShiva> list=databaseHandler.getAll();
-				Collections.reverse(list);
-
-				for(DataShiva cse:list){
-					HashMap<String,String> hashing=new HashMap();
-					if(cse.headerValue!=null && !cse.headerValue.toString().equalsIgnoreCase("") &&
-							cse.newsDetails!=null && !cse.newsDetails.toString().equalsIgnoreCase("") &&
-							cse.id!=null && !cse.id.toString().equalsIgnoreCase("") &&
-							cse.person!=null && !cse.person.toString().equalsIgnoreCase("") &&
-							cse.lastUpdatedDt!=null && !cse.lastUpdatedDt.toString().equalsIgnoreCase("")){
-						hashing.put(HEADER_VALUE,cse.headerValue.trim());
-						hashing.put(NEWS_DETAILS,cse.newsDetails.trim());
-						hashing.put(IDVALUE,"बातम्या क्र. (News No.) : "+ cse.id.trim());
-						hashing.put(PERSONNAME,"बातमी दिलेल्या व्यक्तीचे नाव [ News given by ]: "+ cse.person.trim());
-						System.out.println("बातमी दिलेल्या व्यक्तीचे नाव [ News given by ]: "+ cse.person.trim());
-						hashing.put(DATEVALUE,"बातमी तारीख [News Date]:"+ cse.lastUpdatedDt.trim());
-						System.out.println("बातमी तारीख [News Date]:"+ cse.lastUpdatedDt.trim());
-
-						lcs.add(hashing);
-					}
-
-				}
-
-				//Collections.reverse(lcs);
-				ListAdapter adapter = new SimpleAdapter(
-						Authorization.this, lcs,
-						R.layout.list_item, new String[] { HEADER_VALUE, NEWS_DETAILS,
-								IDVALUE,PERSONNAME,DATEVALUE }, new int[] { R.id.name,
-								R.id.email, R.id.mobile, R.id.personname , R.id.datevalue});
-
-				setListAdapter(adapter);
-			}
-			else
-			{
-				List<DataShiva> list=databaseHandler.getAll();
-				Collections.reverse(list);
-
-				for(DataShiva cse:list){
-					HashMap<String,String> hashing=new HashMap();
-
-					if(cse.headerValue!=null && !cse.headerValue.toString().equalsIgnoreCase("") &&
-							cse.newsDetails!=null && !cse.newsDetails.toString().equalsIgnoreCase("") &&
-							cse.id!=null && !cse.id.toString().equalsIgnoreCase("") &&
-							cse.person!=null && !cse.person.toString().equalsIgnoreCase("") &&
-							cse.lastUpdatedDt!=null && !cse.lastUpdatedDt.toString().equalsIgnoreCase(""))
-						hashing.put(HEADER_VALUE,cse.headerValue.trim());
-					hashing.put(NEWS_DETAILS,cse.newsDetails.trim());
-					hashing.put(IDVALUE,"बातम्या क्र. (News No.) : "+ cse.id.trim());
-					hashing.put(PERSONNAME,"बातमी दिलेल्या व्यक्तीचे नाव [ News given by ]: "+ cse.person.trim());
-					System.out.println("बातमी दिलेल्या व्यक्तीचे नाव [ News given by ]: "+ cse.person.trim());
-					hashing.put(DATEVALUE,"बातमी तारीख [News Date]:"+ cse.lastUpdatedDt.trim());
-					System.out.println("बातमी तारीख [News Date]:"+ cse.lastUpdatedDt.trim());
-
-
-					lcs.add(hashing);
-
-				}
-
-				//Collections.reverse(lcs);
-				ListAdapter adapter = new SimpleAdapter(
-						Authorization.this, lcs,
-						R.layout.list_item, new String[] { HEADER_VALUE, NEWS_DETAILS,
-								IDVALUE,PERSONNAME,DATEVALUE }, new int[] { R.id.name,
-								R.id.email, R.id.mobile, R.id.personname , R.id.datevalue});
-
-				setListAdapter(adapter);
-
-			}
 		}
-
 
 		@Override
 		protected void onPreExecute() {
@@ -477,7 +351,7 @@ AdListener, AppEventListener{
 		InputStream inputStream = null;
 		String result = "";
 		//String result1 = "";
-		/*try {
+		try {
 
 			// 1. create HttpClient
 			HttpClient httpclient = new DefaultHttpClient();
@@ -504,39 +378,7 @@ AdListener, AppEventListener{
 				result = "Did not work!";
 			}
 
-		} */
-		try {
-
-			// 1. create HttpClient
-			HttpClient httpclient = new DefaultHttpClient();
-			// 2. make POST request to the given URL
-			HttpPost httpPost = new HttpPost(url);
-			String allIdsInConcat=strbuff.toString();
-			httpPost.setHeader(HTTP.CONTENT_TYPE,"application/x-www-form-urlencoded;charset=UTF-8");
-			List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
-
-			nameValuePairs.add(new BasicNameValuePair("ids", allIdsInConcat));
-
-
-			System.out.println("############################################################################"+allIdsInConcat);
-
-			httpPost.setEntity(new UrlEncodedFormEntity(nameValuePairs, "UTF-8"));
-			HttpResponse httpResponse = httpclient.execute(httpPost);
-
-			System.out.println("################inputstream###############################"+httpResponse+"################inputstream###############################" );
-			inputStream = httpResponse.getEntity().getContent();
-			System.out.println("################inputstream###############################"+inputStream);
-			// 10. convert inputstream to string
-			if(inputStream != null){
-				result = convertInputStreamToString(inputStream);
-
-			}
-			else{
-				result = "Did not work!";
-			}
-
-		} 
-		catch (Exception e) {
+		} catch (Exception e) {
 			System.out.println("I am in exception :::::::::::"+ e);
 			System.out.println("I am in exception :::::::::::"+ e.getLocalizedMessage());
 			Log.d("InputStream", e.getLocalizedMessage());
