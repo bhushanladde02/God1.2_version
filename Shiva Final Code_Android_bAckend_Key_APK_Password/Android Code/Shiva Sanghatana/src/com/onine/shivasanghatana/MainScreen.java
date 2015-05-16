@@ -49,7 +49,7 @@ public class MainScreen extends Activity implements View.OnClickListener,
 		text.setText("Shiva Sanghatana");
 		
 		MainScreen.this.finish();
-		Intent  intent = new Intent().setClass(this, Tab1.class);
+		Intent  intent = new Intent().setClass(this, Tab3.class);
 		startActivity(intent);		
 	}
 

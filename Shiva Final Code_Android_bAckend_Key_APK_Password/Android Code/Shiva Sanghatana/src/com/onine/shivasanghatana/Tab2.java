@@ -1,4 +1,4 @@
-package com.onine.shivasanghatana;
+/*package com.onine.shivasanghatana;
 
 import java.io.IOException;
 
@@ -35,6 +35,7 @@ public class Tab2 extends Activity implements View.OnClickListener,
 	int fillOnlyOnce1=0;
 	TextView firstTab;
 	TextView previousTab;
+	TextView lastTab;
 	boolean isShaking = false;
 	DfpAdView adView;
 	
@@ -53,10 +54,10 @@ public class Tab2 extends Activity implements View.OnClickListener,
 		TextView text = (TextView) findViewById(R.id.text_header);
 	
 		text.setText("Shiva Sanghatana");
-		/*webView1 = (WebView) findViewById(R.id.dailyPreDetailWebView);
+		webView1 = (WebView) findViewById(R.id.dailyPreDetailWebView);
 		
 		webView1.getSettings().setCacheMode(
-				android.webkit.WebSettings.LOAD_NO_CACHE);*/
+				android.webkit.WebSettings.LOAD_NO_CACHE);
 		
 		
 		webView = (WebView) findViewById(R.id.dailyDetailWebView); //baba
@@ -88,6 +89,9 @@ public class Tab2 extends Activity implements View.OnClickListener,
 		this.firstTab.setBackgroundResource(R.drawable.tab);
 		this.previousTab.setBackgroundResource(R.drawable.tab_active);
 		
+		this.lastTab = ((TextView) findViewById(R.id.lastTab));
+		this.lastTab.setOnClickListener(this);
+		this.lastTab.setBackgroundResource(R.drawable.tab);
 		
 	}
 
@@ -171,7 +175,7 @@ public class Tab2 extends Activity implements View.OnClickListener,
 		
 		
 		if (view == this.firstTab) {
-		/*	webView = (WebView) findViewById(R.id.dailyDetailWebView);//baba
+			webView = (WebView) findViewById(R.id.dailyDetailWebView);//baba
 		//new ReloadWebView(this, 1, webView);
 		//webView.setVisibility(View.GONE);
 		//	isFirstTab = true;
@@ -190,14 +194,14 @@ public class Tab2 extends Activity implements View.OnClickListener,
 			this.firstTab.setBackgroundResource(R.drawable.tab_active);
 			this.previousTab.setBackgroundResource(R.drawable.tab);
 			this.tabValue="";
-			adView.loadAd(new AdRequest());*/
+			adView.loadAd(new AdRequest());
 			Tab2.this.finish();
 			Intent  intent = new Intent().setClass(this, Tab1.class);
 			startActivity(intent);
 		}
-		else
+		else if(view == this.previousTab)
 		{
-			/*webView = (WebView) findViewById(R.id.dailyPreDetailWebView);
+			webView = (WebView) findViewById(R.id.dailyPreDetailWebView);
 			System.out.println("I am in second tab");
 			
 		   //webView = (WebView) findViewById(R.id.dailyDetailWebView);
@@ -221,11 +225,16 @@ public class Tab2 extends Activity implements View.OnClickListener,
 			this.previousTab.setBackgroundResource(R.drawable.tab_active);
 			//webView.getSettings().setJavaScriptCanOpenWindowsAutomatically(true);
 			this.tabValue="";
-			adView.loadAd(new AdRequest());*/
+			adView.loadAd(new AdRequest());
 			Tab2.this.finish();
 			Intent  intent = new Intent().setClass(this, Tab2.class);
 			startActivity(intent);
 			
+		}
+		else{
+			Tab2.this.finish();
+			Intent  intent = new Intent().setClass(this, Tab3.class);
+			startActivity(intent);
 		}
 	}
 
@@ -277,3 +286,4 @@ public class Tab2 extends Activity implements View.OnClickListener,
 
 
 }
+*/
