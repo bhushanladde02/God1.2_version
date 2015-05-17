@@ -18,6 +18,7 @@ import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.protocol.HTTP;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
@@ -76,9 +77,10 @@ AdListener, AppEventListener{
 	private static final String NEWS_DETAILS = "email";
 	private static final String IDVALUE = "mobile";
 
-
+	ProgressDialog pdialog=null;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
+		pdialog=new ProgressDialog(AddNewsPage.this);
 		// TODO Auto-generated method stub
 		System.out.println("I am in autho");
 
@@ -114,6 +116,10 @@ AdListener, AppEventListener{
 			public void onClick(View v) {
 				if(sessionId!=null){
 					System.out.println("I  am inside the image1 one listner ");
+					
+					pdialog.setCancelable(true);
+					pdialog.setMessage("कृपया प्रतीक्षा करा. बातम्या प्रकाशन प्रक्रिया सुरु आहे  (Please Wait. News is publishing...)");
+					pdialog.show();
 					new HttpAsyncTask().execute("http://onine.in/Shiva/AddNews");
 				}
 				else{
@@ -156,6 +162,8 @@ AdListener, AppEventListener{
 
 	//Fetching Data:
 	private class HttpAsyncTask extends AsyncTask<String, Void, String> {
+		ProgressDialog asyncDialog = new ProgressDialog(AddNewsPage.this);
+	     
 		@Override
 		protected String doInBackground(String... urls) {
 			try{
@@ -178,6 +186,8 @@ AdListener, AppEventListener{
 		// onPostExecute displays the results of the AsyncTask.
 		@Override
 		protected void onPostExecute(String result) {
+			pdialog.dismiss();
+			asyncDialog.dismiss();
 			if(newsDetails!=null && !newsDetails.getText().toString().equalsIgnoreCase("") && newsTitle!=null && !newsTitle.getText().toString().equalsIgnoreCase("")){
 				Toast.makeText(getApplicationContext(), "बातम्या  प्रकाशित यशस्वी (News is published)",Toast.LENGTH_SHORT).show();
 				Intent intent = new Intent(getApplicationContext(), Authorization.class);
@@ -189,6 +199,8 @@ AdListener, AppEventListener{
 		@Override
 		protected void onPreExecute() {
 			// TODO Auto-generated method stub
+			pdialog.setMessage("कृपया प्रतीक्षा करा. बातम्या प्रकाशन प्रक्रिया सुरु आहे  (Please Wait. News is publishing...)");
+   
 			if(newsDetails==null || newsDetails.getText().toString().equalsIgnoreCase("") || newsTitle==null || newsTitle.getText().toString().equalsIgnoreCase("")){
 				Toast.makeText(getApplicationContext(), "कृपया सर्व तपशील भरा (Please All The Details)",Toast.LENGTH_SHORT).show();
 

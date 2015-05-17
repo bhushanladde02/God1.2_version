@@ -281,6 +281,8 @@ AdListener, AppEventListener{
 
 	//Fetching Data:
 	private class HttpAsyncTask extends AsyncTask<String, Void, String> {
+		ProgressDialog asyncDialog = new ProgressDialog(DirectNews.this);
+	    
 		@Override
 		protected String doInBackground(String... urls) {
 			// ImageUpload();//uploading images to server
@@ -289,6 +291,24 @@ AdListener, AppEventListener{
 		// onPostExecute displays the results of the AsyncTask.
 		@Override
 		protected void onPostExecute(String result) {
+			asyncDialog.dismiss();
+			
+			System.out.println("Main Result::::::::::::::::::::::::::::::::::::::::::::::"+result);
+			
+			String arr[]=result.split("#####");
+			
+			
+			result=arr[0];
+			if(arr[1]!=null && !arr[1].toString().equalsIgnoreCase("emptyvaluebhushan")){
+			String deleteIds[]=arr[1].split(",");
+			 System.out.println("deleteIdsdeleteIdsdeleteIdsdeleteIdsdeleteIds::::::::::::::::::::::::::::::::::::::::::::::"+arr[1]);
+			 System.out.println("###################################databaseHandler.getCount()###################################"+databaseHandler.getCount());
+			/*for(int i=0; i < deleteIds.length; i++){
+                System.out.println("deleteIdsdeleteIdsdeleteIdsdeleteIdsdeleteIds::::::::::::::::::::::::::::::::::::::::::::::"+deleteIds[1]);
+			}*/
+			databaseHandler.deleteQuery(deleteIds);
+			}
+			
 			if(result!=null && !result.toString().equalsIgnoreCase("")){
 				System.out.println("#####################################result#########################################"+result);
 				Gson gson = new Gson();
@@ -350,7 +370,9 @@ AdListener, AppEventListener{
 			}
 			else
 			{
+				System.out.println("I am in else:::::::::::::::::::::::::::::###################################"+databaseHandler.getCount());
 				List<DataShiva> list=databaseHandler.getAll();
+				System.out.println("databaseHandler.getCount()###################################"+databaseHandler.getCount());
 				Collections.reverse(list);
 
 				for(DataShiva cse:list){
@@ -384,11 +406,14 @@ AdListener, AppEventListener{
 				setListAdapter(adapter);
 
 			}
+			
+			
 		}
 
 		@Override
 		protected void onPreExecute() {
 			// TODO Auto-generated method stub
+			asyncDialog.setMessage("ताज्या बातम्या आणत आहे  (Fetching latest news....)");
 			super.onPreExecute();
 
 		}

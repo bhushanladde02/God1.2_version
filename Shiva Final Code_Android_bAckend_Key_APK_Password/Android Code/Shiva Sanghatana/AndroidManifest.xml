@@ -41,17 +41,17 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="com.onine.shivasanghatana.MainScreen" android:screenOrientation="portrait" />
-		<activity android:name="com.onine.shivasanghatana.GaaliDetails" android:screenOrientation="portrait" />
+        <activity android:name="com.onine.shivasanghatana.MainScreen" />
+		<activity android:name="com.onine.shivasanghatana.GaaliDetails" />
 	    <activity android:name="com.onine.shivasanghatana.Tab1"  ></activity>
-        <activity android:name="com.onine.shivasanghatana.Tab2"  ></activity> 
-        <activity android:name="com.onine.shivasanghatana.Tab3"  ></activity> 
+        <activity android:name="com.onine.shivasanghatana.Tab2" ></activity> 
+        <activity android:name="com.onine.shivasanghatana.Tab3" android:windowSoftInputMode="adjustPan|adjustResize"></activity> 
         <activity android:name="com.onine.shivasanghatana.Authorization"  ></activity> 
-        <activity android:name="com.onine.shivasanghatana.SingleNewsActivity"  ></activity> 
+        <activity android:name="com.onine.shivasanghatana.SingleNewsActivity"  android:windowSoftInputMode="adjustResize"></activity> 
         <activity android:name="com.onine.shivasanghatana.DirectNews"  ></activity> 
-        <activity android:name="com.onine.shivasanghatana.AddNewsPage"  ></activity> 
-        <activity android:name="com.onine.shivasanghatana.RegisterPage"  ></activity> 
-        
+        <activity android:name="com.onine.shivasanghatana.AddNewsPage" android:windowSoftInputMode="adjustPan"></activity> 
+        <activity android:name="com.onine.shivasanghatana.RegisterPage"  android:windowSoftInputMode="adjustResize"></activity> 
+       
         
          
         

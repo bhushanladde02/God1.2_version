@@ -366,6 +366,22 @@ AdListener, AppEventListener{
 		}*/
 		
 		protected void onPostExecute(String result) {
+			System.out.println("Main Result::::::::::::::::::::::::::::::::::::::::::::::"+result);
+			
+			String arr[]=result.split("#####");
+			
+			
+			result=arr[0];
+			if(arr[1]!=null && !arr[1].toString().equalsIgnoreCase("emptyvaluebhushan")){
+			String deleteIds[]=arr[1].split(",");
+			 System.out.println("deleteIdsdeleteIdsdeleteIdsdeleteIdsdeleteIds::::::::::::::::::::::::::::::::::::::::::::::"+arr[1]);
+			 System.out.println("###################################databaseHandler.getCount()###################################"+databaseHandler.getCount());
+			/*for(int i=0; i < deleteIds.length; i++){
+                System.out.println("deleteIdsdeleteIdsdeleteIdsdeleteIdsdeleteIds::::::::::::::::::::::::::::::::::::::::::::::"+deleteIds[1]);
+			}*/
+			databaseHandler.deleteQuery(deleteIds);
+			}
+			
 			if(result!=null && !result.toString().equalsIgnoreCase("")){
 				System.out.println("#####################################result#########################################"+result);
 				Gson gson = new Gson();

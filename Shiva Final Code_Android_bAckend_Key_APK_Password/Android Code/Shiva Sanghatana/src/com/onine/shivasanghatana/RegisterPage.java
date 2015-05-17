@@ -18,6 +18,7 @@ import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.protocol.HTTP;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
@@ -126,6 +127,8 @@ AdListener, AppEventListener{
 
 	//Fetching Data:
 	private class HttpAsyncTask extends AsyncTask<String, Void, String> {
+		ProgressDialog asyncDialog = new ProgressDialog(RegisterPage.this);
+	    
 		@Override
 		protected String doInBackground(String... urls) {
 			try{
@@ -165,6 +168,8 @@ AdListener, AppEventListener{
 		// onPostExecute displays the results of the AsyncTask.
 		@Override
 		protected void onPostExecute(String result) {
+			asyncDialog.dismiss();
+			
 
 			if(     name!=null && !name.getText().toString().equalsIgnoreCase("")
 					&& phonenumber!=null && !phonenumber.getText().toString().equalsIgnoreCase("")
@@ -213,6 +218,7 @@ AdListener, AppEventListener{
 
 		@Override
 		protected void onPreExecute() {
+			asyncDialog.setMessage("नोंदणी सुरू आहे (Registration is start....)");
 			// TODO Auto-generated method stub
 			if(name==null || name.getText().toString().equalsIgnoreCase("") 
 					|| phonenumber==null || phonenumber.getText().toString().equalsIgnoreCase("")

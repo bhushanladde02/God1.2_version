@@ -214,6 +214,9 @@ public class Tab3 extends Activity implements View.OnClickListener,
 	
 		 //Fetching Data:
 			private class HttpAsyncTask extends AsyncTask<String, Void, String> {
+				 ProgressDialog asyncDialog = new ProgressDialog(Tab3.this);
+			       
+				int flag=0;
 				@Override
 				protected String doInBackground(String... urls) {
 					try{
@@ -223,6 +226,7 @@ public class Tab3 extends Activity implements View.OnClickListener,
 						String newsTitleStr = new String(username.getText().toString().getBytes("UTF-8"), "UTF-8");
 						String newsDetailsStr = new String(password.getText().toString().getBytes("UTF-8"), "UTF-8");
 						String arr[]={newsTitleStr,newsDetailsStr};
+						
 						return POST(urls[0],arr);
 					}
 					else {
@@ -237,16 +241,20 @@ public class Tab3 extends Activity implements View.OnClickListener,
 				@Override
 				protected void onPostExecute(String results) {
 					results=Tab3.results1;
+					asyncDialog.dismiss();
 					if(results!=null && !results.equalsIgnoreCase("")&&!results.equalsIgnoreCase("empty")){
-					      Toast.makeText(getApplicationContext(), "Login Successful...",Toast.LENGTH_SHORT).show();
+						   
+					      Toast.makeText(getApplicationContext(), "लॉग-इन यशस्वी (Login Successful...)",Toast.LENGTH_SHORT).show();
+					   
 					      Intent intent = new Intent(getApplicationContext(), Authorization.class);
 					      intent.putExtra("sessionId",results);
 					      
 			          	  startActivity(intent);
 					   }	
 					   else{
+						   if(flag==0)
 					      Toast.makeText(getApplicationContext(), "चुकीची माहिती (Wrong Credentials) : मोबाइल क्रमांक आणि पासवर्ड जुळणारे नाही (Mobile Number and password is not matching)",Toast.LENGTH_SHORT).show();
-					    
+					     
 					   }
 
 				
@@ -256,8 +264,12 @@ public class Tab3 extends Activity implements View.OnClickListener,
 				@Override
 				protected void onPreExecute() {
 					// TODO Auto-generated method stub
+					 asyncDialog.setMessage("लोड करीत आहे (loading....)");
+			            //show dialog
+			            asyncDialog.show();
 					if(username==null || username.getText().toString().equalsIgnoreCase("") || password==null || password.getText().toString().equalsIgnoreCase("")){
 						Toast.makeText(getApplicationContext(), "कृपया सर्व तपशील भरा (Please All The Details)",Toast.LENGTH_SHORT).show();
+						flag=1;
 
 					}
 					super.onPreExecute();

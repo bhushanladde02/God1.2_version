@@ -7,6 +7,7 @@ import java.util.List;
  
 
 
+
 import com.onine.pojo.DataShiva;
 
 import android.content.ContentValues;
@@ -14,6 +15,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.text.TextUtils;
  
 public class DatabaseHandler extends SQLiteOpenHelper {
  
@@ -130,13 +132,13 @@ public class DatabaseHandler extends SQLiteOpenHelper {
                 register.setHeaderValue(cursor.getString(3));
                 register.setNewsDetails(cursor.getString(4));
                 
-                System.out.println("***************cursor.getString(0)************" +cursor.getString(0));
+               /* System.out.println("***************cursor.getString(0)************" +cursor.getString(0));
                 System.out.println("***************cursor.getString(1)************" +cursor.getString(1));
                 
                 System.out.println("***************cursor.getString(2)************" +cursor.getString(2));
                 System.out.println("***************cursor.getString(3)************" +cursor.getString(3));
                 System.out.println("***************cursor.getString(4)************" +cursor.getString(4));
-                
+                */
                 // Adding contact to list
                 registerList.add(register);
             } while (cursor.moveToNext());
@@ -170,6 +172,15 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         db.delete(TABLE_REGISTER, idvalue + " = ?",
                 new String[] { String.valueOf(contact.getId()) });
         db.close();
+    }
+    
+    public void deleteQuery(String[] delete) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        String args = TextUtils.join(", ", delete);
+        
+        db.execSQL(String.format("DELETE FROM "+TABLE_REGISTER+" WHERE "+idvalue+" IN (%s);", args));
+        db.close();
+        
     }
  
     
