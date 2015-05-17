@@ -62,10 +62,11 @@
                 android:text="फोन नंबर(Phone Number)*"
                 android:textColor="#372c24"
                 android:textSize="18sp"
-                android:inputType="number" />
+                 />
 
             <EditText
                 android:id="@+id/phonenumber"
+                android:inputType="number"
                 android:layout_width="fill_parent"
                 android:layout_height="40dip"
                 android:layout_marginBottom="20dip"
