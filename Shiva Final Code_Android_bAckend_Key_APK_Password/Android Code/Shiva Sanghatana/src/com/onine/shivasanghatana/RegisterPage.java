@@ -54,12 +54,14 @@ AdListener, AppEventListener{
 	private EditText  password=null;
 	private EditText  position=null;
 	private String deviceId=null;
-
+	ProgressDialog pdialog=null;
 	private Button publishnews;
 	int counter = 3;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
+		pdialog=new ProgressDialog(RegisterPage.this);
+		
 		System.out.println("I am in autho");
 
 		//http://onine.in/Shiva/Registeruser?name=bhushan&phonenumber=8055925868&city=nasik&country=india&deviceid=22&gender=m&password=test
@@ -92,7 +94,9 @@ AdListener, AppEventListener{
 
 		publishnews.setOnClickListener(new View.OnClickListener() {
 			public void onClick(View v) {
-
+				pdialog.setCancelable(true);
+				pdialog.setMessage("कृपया प्रतीक्षा करा. नोंदणी सुरू आहे (Registration is start....)");
+				pdialog.show();
 				System.out.println("I  am inside the image1 one listner ");
 				new HttpAsyncTask().execute("http://onine.in/Shiva/Registeruser");
 			}
@@ -168,6 +172,7 @@ AdListener, AppEventListener{
 		// onPostExecute displays the results of the AsyncTask.
 		@Override
 		protected void onPostExecute(String result) {
+			pdialog.dismiss();
 			asyncDialog.dismiss();
 			
 

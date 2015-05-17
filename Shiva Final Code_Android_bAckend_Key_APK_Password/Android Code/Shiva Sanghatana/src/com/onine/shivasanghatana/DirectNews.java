@@ -86,6 +86,7 @@ AdListener, AppEventListener{
 	private Button login;
 	private Button register;
 	ArrayList<HashMap<String, String>> lcs ;
+	 private Button directnw;
 	//TableLayout tbl;
 	//TableRow newRow ;
 
@@ -136,7 +137,27 @@ AdListener, AppEventListener{
 		System.out.println(strbuff.toString());
 		//headerValue =(TextView)findViewById(R.id.textView5);
 		//headerValue.setText("");
+		directnw = (Button)findViewById(R.id.button9999);
+		
+		
+		  directnw.setOnClickListener(new View.OnClickListener() {
+	            public void onClick(View v) {
+	            	
+	            	Intent intent1 = new Intent(getApplicationContext(), DirectNews.class);
+	            	startActivity(intent1);
+	            	finish();
+	                
+	            	System.out.println("I  am inside the image1 one listner ");
+	            	Intent intent = new Intent(getApplicationContext(), DirectNews.class);
+	            	//String message = "Bhushan Arun Ladde";
+	            	//intent.putExtra(EXTRA_MESSAGE, message);
+	            	startActivity(intent);
+	                //v.getId() will give you the image id
 
+	            }
+	        });
+	
+		
 		lcs = new ArrayList<HashMap<String, String>>();
 
 		ListView lv = getListView();

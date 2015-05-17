@@ -61,7 +61,8 @@
                 android:layout_marginTop="10px"
                 android:text="फोन नंबर(Phone Number)*"
                 android:textColor="#372c24"
-                android:textSize="18sp" />
+                android:textSize="18sp"
+                android:inputType="number" />
 
             <EditText
                 android:id="@+id/phonenumber"
