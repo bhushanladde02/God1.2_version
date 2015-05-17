@@ -59,7 +59,7 @@ public class AuthServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		
-		//doPost(request,response);
+		doPost(request,response);
 	/*	System.out.println("In get");
 		List<DataShiva> cData=new Vector<DataShiva>();;   
 
@@ -121,15 +121,22 @@ public class AuthServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		List<DataShiva> cData=new Vector<DataShiva>();;   
 		System.out.println("In Post");
+		StringBuffer deleteIds=new StringBuffer();;
+		
 
 		try{
-
+			String headerValue=request.getParameter("ids");
+			System.out.println("Data id comming from apps::::::"+headerValue);
 			if(cData.size()==0){
 				System.out.println("cData.size()::"+cData.size());
 				cData.clear();
 				System.out.println("I am in post to authorize");
 				//ResultSet rs=SqlCrudOperation.selectQuery("Select * from oldernewsdetails where authflag='n'");
-				ResultSet rs=SqlCrudOperation.selectQuery("Select oldernewsdetails.id as id,oldernewsdetails.title,oldernewsdetails.details,oldernewsdetails.authflag,oldernewsdetails.lastupdated,registeruser.name from oldernewsdetails left outer join registeruser on oldernewsdetails.personid=registeruser.id");
+				ResultSet rs;
+				if(headerValue!=null && !headerValue.equalsIgnoreCase(""))
+				 rs=SqlCrudOperation.selectQuery("Select oldernewsdetails.id as id,oldernewsdetails.title,oldernewsdetails.details,oldernewsdetails.authflag,oldernewsdetails.lastupdated,registeruser.name from oldernewsdetails left outer join registeruser on oldernewsdetails.personid=registeruser.id and oldernewsdetails.authflag='y' where oldernewsdetails.id not in ("+headerValue+")");
+				else
+				 rs=SqlCrudOperation.selectQuery("Select oldernewsdetails.id as id,oldernewsdetails.title,oldernewsdetails.details,oldernewsdetails.authflag,oldernewsdetails.lastupdated,registeruser.name from oldernewsdetails left outer join registeruser on oldernewsdetails.personid=registeruser.id  and oldernewsdetails.authflag='y'");	
 				while(rs.next())
 				{
 					String titl=rs.getString("title");
@@ -165,9 +172,35 @@ public class AuthServlet extends HttpServlet {
 			String json =g.toJson(cData);
 			response.setCharacterEncoding("UTF-8");
 			response.setContentType("application/json; charset=UTF-8");
+			
+			
+			
+			 
+			ResultSet rs=SqlCrudOperation.selectQuery("select id from oldernewsdetails where authflag='n'");
+			String prefix = "";
+			//String open="{";
+			//String close="}";
+			//deleteIds.append(open);
+			while(rs.next())
+			{
+				
+				deleteIds.append(prefix);
+				prefix = ",";
+				String titl=rs.getString("id");
+				deleteIds.append("\""+titl+"\"");
+			}
+			//deleteIds.append(close);
+			
+			
+			
 			PrintWriter pw=response.getWriter();
 
-			pw.write(json);
+			if(deleteIds!=null && !deleteIds.toString().equalsIgnoreCase("")){
+			pw.write(json+"#####"+deleteIds.toString());
+			}else{
+				pw.write(json+"#####"+"emptyvaluebhushan");
+					
+			}
 
 		}catch (Exception e) {
 			System.out.println(e);

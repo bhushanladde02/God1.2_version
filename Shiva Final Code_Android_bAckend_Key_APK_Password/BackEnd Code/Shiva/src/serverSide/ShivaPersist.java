@@ -72,7 +72,7 @@ public void init() throws ServletException {
 			System.out.println("cData.size()::"+cData.size());
 			
 			cData.clear();
-			   ResultSet rs=SqlCrudOperation.selectQuery("Select * from oldernewsdetails");
+			   ResultSet rs=SqlCrudOperation.selectQuery("Select * from oldernewsdetails where authflag='y'");
 			   while(rs.next())
 			   {
 				   String titl=rs.getString("title");
