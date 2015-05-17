@@ -88,7 +88,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int imgNext=0x7f09000f;
         public static final int imgPre=0x7f09000e;
         public static final int lastTab=0x7f09000c;
-        public static final int listview_background_shape=0x7f09002f;
+        public static final int listview_background_shape=0x7f09002e;
         public static final int ll_header_parent_wrapper=0x7f090013;
         public static final int mobile=0x7f090017;
         public static final int mobile_label=0x7f090001;
@@ -108,7 +108,6 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int textView3=0x7f090029;
         public static final int textView33=0x7f090025;
         public static final int textView377=0x7f09002a;
-        public static final int textView4=0x7f09002e;
         public static final int textView5=0x7f09002d;
         public static final int text_header=0x7f090014;
         public static final int textview222=0x7f090028;
