@@ -24,8 +24,8 @@ DROP TABLE IF EXISTS `oldernewsdetails`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `oldernewsdetails` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `title` varchar(10000) CHARACTER SET utf8 NOT NULL,
-  `details` varchar(10000) CHARACTER SET utf8 NOT NULL,
+  `title` longtext COLLATE utf8_unicode_ci NOT NULL,
+  `details` longtext COLLATE utf8_unicode_ci NOT NULL,
   `lastupdated` varchar(11) CHARACTER SET utf8 NOT NULL,
   `authflag` varchar(2) COLLATE utf8_unicode_ci DEFAULT NULL,
   `personid` varchar(1000) COLLATE utf8_unicode_ci DEFAULT NULL,
@@ -92,4 +92,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2015-05-19 15:00:45
+-- Dump completed on 2015-05-19 15:57:16
