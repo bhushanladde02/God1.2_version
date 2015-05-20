@@ -43,6 +43,8 @@ public class SqlCrudOperation {
 		      //STEP 3: Open a connection
 		      //System.out.println("Connecting to database...");
 		      conn = DriverManager.getConnection(DB_URL,USER,PASS);
+		      conn.createStatement().execute("SET NAMES utf8mb4");
+			     
 		     // conn=DriverManager.getConnection(url);
 
 		      //STEP 4: Execute a query
