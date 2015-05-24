@@ -99,4 +99,14 @@
     <servlet-name>AddNews</servlet-name>
     <url-pattern>/AddNews</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>Authorized</display-name>
+    <servlet-name>Authorized</servlet-name>
+    <servlet-class>serverSide.Authorized</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Authorized</servlet-name>
+    <url-pattern>/Authorized</url-pattern>
+  </servlet-mapping>
 </web-app>

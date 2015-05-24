@@ -1,0 +1,133 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+
+<html>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+<head>
+<style>
+table,td
+{
+border:1px solid black;
+}
+</style>
+</head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<body onload="myFunction1()">
+
+
+<font color="red" size="2%"><u>बातम्याची  सध्याच्या स्थितीत लाल रंगाची बटण </u> </font>
+<br/><br/><br/>
+<div id="myTable" style="width:100%">
+</div>
+
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-49582601-2', 'onine.in');
+  ga('send', 'pageview');
+
+</script>
+
+<script>
+
+function authvalue(value1,value2)
+{
+	var text='button'+value1;
+	//alert(text);
+	
+	//alert(value1);
+	//alert(value2);
+	var da=value1;
+	var value=value2;
+	
+	$.ajax({
+		type: 'post',
+        url: '/Shiva/Authorized',
+        data: {
+        	da:da,
+        	value:value
+        },        
+        success: function(data){
+            console.log(data);
+            if(value2='y'){
+            alert('News is authorized');
+            }
+            else{
+            	alert('News is not authorized');
+            }
+        	//table.innerHTML='<table style=\"width:100%;\">'+data+'</table>';
+        	//document.getElementById("text").style.color='red';
+        	//document.getElementById("newsDetails").value='';
+        	        	
+           	//table.innerHtml="<table style=\"width:100%\">"+data+"</table>";
+        },
+        error:function(){
+            alert("failure");
+           
+        }  
+
+	});
+}
+
+
+function myFunction()
+{
+var table = document.getElementById("myTable");
+
+
+	table.innerHTML='';
+
+	$.ajax({
+		type: 'post',
+        url: '/Shiva/Authorized',
+        data: {
+        
+        },        
+        success: function(data){
+            console.log(data);
+        	table.innerHTML='<table style=\"width:100%;\">'+data+'</table>';
+        	
+           	//table.innerHtml="<table style=\"width:100%\">"+data+"</table>";
+        },
+        error:function(){
+            alert("failure");
+           
+        }  
+    });
+
+}
+
+function myFunction1()
+{
+var table = document.getElementById("myTable");
+
+
+	table.innerHTML='';
+
+	$.ajax({
+		type: 'post',
+        url: '/Shiva/Authorized',
+        data: {
+        	
+        },        
+        success: function(data){
+            console.log(data);
+        	table.innerHTML='<table style=\"width:100%;\">'+data+'</table>';
+        	
+        	        	
+           	//table.innerHtml="<table style=\"width:100%\">"+data+"</table>";
+        },
+        error:function(){
+            alert("failure");
+           
+        }  
+    });
+
+}
+</script>
+
+</body>
+</html>

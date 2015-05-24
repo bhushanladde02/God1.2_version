@@ -43,6 +43,15 @@ public String getNewsDetails() {
 public void setNewsDetails(String newsDetails) {
 	this.newsDetails = newsDetails;
 }
+
+
+public String authString() {
+	if(authValue.equalsIgnoreCase("y")){
+		return "<tr><td>बातम्या  क्रमांक : "+id+"<br/><b>"+headerValue+":</b><br/>"+newsDetails+"<br/><b> तारीख:</b>"+lastUpdatedDt.split("/")[2]+"/"+lastUpdatedDt.split("/")[1]+"/"+lastUpdatedDt.split("/")[0]+" <br><button id='button"+id+"' onclick=\"authvalue('"+id+"','y')\"> <font color=\"red\">* अधिकृत (Authorize) * </font></button> <button  id='button"+id+"' onclick=\"authvalue('"+id+"','n')\">अधिकृत नाही (Not Authorize) </button></br></td></tr>";
+	}else{
+		return "<tr><td>बातम्या  क्रमांक : "+id+"<br/><b>"+headerValue+":</b><br/>"+newsDetails+"<br/><b> तारीख:</b>"+lastUpdatedDt.split("/")[2]+"/"+lastUpdatedDt.split("/")[1]+"/"+lastUpdatedDt.split("/")[0]+" <br><button  id='button"+id+"' onclick=\"authvalue('"+id+"','y')\">अधिकृत  (Not Authorize)</button> <button  id='button"+id+"' onclick=\"authvalue('"+id+"','n')\"><font color=\"red\">* अधिकृत नाही (Not Authorize) *</font></button></br></td></tr>";
+	}
+}
 @Override
 	public String toString() {
 		

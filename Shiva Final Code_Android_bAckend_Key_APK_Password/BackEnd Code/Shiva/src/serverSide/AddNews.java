@@ -68,7 +68,7 @@ public void init() throws ServletException {
 		
 		d.setHeaderValue(headerValue);
 		d.setNewsDetails(newsDetails);
-		String query="INSERT INTO `shiva`.`oldernewsdetails` (`title`, `details`, `lastupdated`,`authflag`,`personid`) VALUES ( '"+headerValueCon+"', '"+newsDetailsCon+"', '"+TodayDate.todaydate()+"','y','"+sessionIdValue+"');";
+		String query="INSERT INTO `shiva`.`oldernewsdetails` (`title`, `details`, `lastupdated`,`authflag`,`personid`) VALUES ( '"+headerValueCon+"', '"+newsDetailsCon+"', '"+TodayDate.todaydate()+"','n','"+sessionIdValue+"');";
 	    System.out.println("Query ::"+query);
 	    String query1 = new String(query.getBytes("UTF-8"), "UTF-8");
 	    result=SqlCrudOperation.insertQuery(query1);
